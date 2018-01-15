@@ -33,3 +33,9 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    Twig_Extensions_Extension_Intl:
+        class: Twig_Extensions_Extension_Intl
+
+    Twig_Extensions_Extension_Text:
+        class: Twig_Extensions_Extension_Text

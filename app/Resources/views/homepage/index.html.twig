@@ -1,12 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <div class="rwo">
-            <div class="col">
-                <h1>E-commerce Symfony 3.4 - Accueil</h1>
+    <div class="row my-4">
+        <div class="col">
+            <h1 class="mb-4">{{ 'homepage.categories'| trans | capitalize}}</h1>
+            <p>
+                {% for category in categories %}
+                <a href="{{ path('homepage.category', {'slugCategory' : category.name}) }}" class="btn btn-primary">
+                    {{ category.name }} <span class="badge badge-light"> {{ category.nb }}</span>
+                </a>
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+
+    <div class="row my-4">
+        <div class="col">
+            <h1>{{'homepage.ideas' | trans | capitalize }}</h1>
+            <div class="row">
+                {% for product in products %}
+                <div class="col-sm-4">
+                    <h2>{{ product.name }}</h2>
+                    <img src="{{ asset("img/product/"~product.image) }}" class="img-fluid" alt="">
+                    <p class="h5 my-2">{{ product.price | localizedcurrency('EUR') }}</p>
+                    <p>
+                        <a href="{{ path('homepage.product', {'slugProduct' : product.name}) }}" class="btn btn-primary">
+                            <span class="fas fa-eye"></span>
+                            Consult
+                        </a>
+                    </p>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
+
+
 {% endblock %}
 

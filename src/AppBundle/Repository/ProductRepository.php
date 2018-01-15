@@ -10,4 +10,43 @@ namespace AppBundle\Repository;
  */
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getProductsRandom($locale)
+    {
+        $result = $this->createQueryBuilder('product')
+            ->select('product_trans.name, product.price, product.image, product_trans.slug')
+            ->join('product.translations', 'product_trans')
+            ->join('product.category', 'category')
+            ->where('product_trans.locale = :locale')
+            ->setParameters([
+                'locale' => $locale
+            ])
+            ->orderBy('RAND()')
+            ->setMaxResults(6)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $result;
+    }
+
+
+    public function getOneProduct($locale, $slugProduct)
+    {
+        $result = $this->createQueryBuilder('product')
+            ->select('p_trans.name, product.image, p_trans.description, product.price, product.stock')
+            ->join('product.translations', 'p_trans')
+            ->where('p_trans.locale = :locale')
+            ->andwhere('p_trans.slug= :slugProduct')
+            ->setParameters([
+                'locale' => $locale,
+                'slugProduct' => $slugProduct
+            ])
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+
+        return $result;
+    }
+
+
 }

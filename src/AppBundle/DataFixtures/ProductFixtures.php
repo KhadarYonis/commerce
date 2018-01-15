@@ -34,15 +34,13 @@ class ProductFixtures extends Fixture implements DependentFixtureInterface
              *      le dossier ciblé doit exister
              */
             $product->setImage(
-                $faker->imageUrl(
                     $faker->image(
                         'web/img/product',
                         '400',
                         '400',
                         'cats',
-                        'false'
+                        false
                     )
-                )
             );
 
             // associer le produit à une catégorie

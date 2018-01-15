@@ -1,0 +1,5 @@
+<div class="dropdown-menu">
+    {% for category in categories %}
+        <a class="dropdown-item" href="{{ path('homepage.category', {'slugCategory' : category.translations[app.request.locale].slug}) }}">{{ category.translations[app.request.locale].name }}</a>
+    {% endfor %}
+</div>

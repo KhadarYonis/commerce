@@ -2,19 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Commerce{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/fontawesome-all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/fontawesome-all.css') }}">
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
-        {% block body %}{% endblock %}
+        <body>
+            <div class="container">
+                {% include 'inc/nav.html.twig' %}
+                {% block body %}{% endblock %}
+            </div>
 
-        <script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>
-        <script src="{{ asset('js/popper.min.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-        {% block javascripts %}{% endblock %}
-    </body>
+            <script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}"></script>
+            <script src="{{ asset('js/popper.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            {% block javascripts %}{% endblock %}
+        </body>
 </html>

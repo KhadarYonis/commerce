@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">My Website</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><span class="fas fa-home"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                            {{ 'homepage.categories'| trans | capitalize}}
+                        </a>
+
+                        {{ render_menu() | raw }}
+                    </li>
+                </ul>
+                <div class="my-1">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                <span class="fas fa-user"></span>
+                            </a>
+                            <div class="dropdown-menu">
+                                {% set route = app.request.attributes.get('_route') %}
+                                {% set route_params = app.request.attributes.get('_route_params') %}
+                                {% set params = route_params|merge(app.request.query.all) %}
+
+                                {{ dump(route, route_params, params) }}
+                                {{ dump(app.request.attributes.get('_route_params')['_locale']) }}
+
+
+                                    <a class="dropdown-item" href="{{ path(route, params|merge({ _locale: 'fr' })) }}"><img src="{{ asset('img/fr.svg') }}" alt="Francais" style="witdh:20px; height: 20px"/></a>
+                                    <a class="dropdown-item" href="{{ path(route, params|merge({ _locale: 'en' })) }}"><img src="{{ asset('img/gb.svg') }}" alt="English" style="witdh:20px; height: 20px"/></a>
+
+
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Link</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
