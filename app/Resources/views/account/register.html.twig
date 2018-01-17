@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row my-4">
+        <div class="col">
+            <h1 class="mb-4">S'enregistrer</h1>
+            {{ form_start(form, {'attr': { 'novalidate': 'novalidate' } } ) }}
+            <p>
+                {{ form_label(form.username, 'Identifiant :') }}
+                {{ form_widget(form.username, { 'attr' : {
+                    'placeholder' : 'Saisissez e-mail'
+                }}) }}
+                {{ form_errors(form.username) }}
+            </p>
+
+            <p>
+                {{ form_label(form.password, 'Mot de passe :') }}
+                {{ form_widget(form.password, { 'attr' : {
+                    'placeholder' : 'Saisissez le mot de passe'
+                }}) }}
+                {{ form_errors(form.password) }}
+            </p>
+
+
+            <p>
+                {{ form_label(form.email, 'E-mail :') }}
+                {{ form_widget(form.email, { 'attr' : {
+                    'placeholder' : 'Saisissez e-mail'
+                }}) }}
+                {{ form_errors(form.email) }}
+            </p>
+
+            <p>
+                <input type="submit" name="submit" value="Valider" class="btn btn-info">
+            </p>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{% endblock %}

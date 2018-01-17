@@ -1,0 +1,5 @@
+username: vous n'avez pas saisi votre identifiant
+password: Vous n'avez pas saisi votre mot de passe
+email:
+    notblank: Vous n'avez pas saisi votre email
+    incorrect: L'email est incorrect

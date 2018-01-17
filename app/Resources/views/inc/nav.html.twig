@@ -25,23 +25,54 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                                <span class="fas fa-user"></span>
+                                    <span class="fas fa-globe"></span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#"><img src="{{ asset('img/fr.svg') }}" alt="Francais" style="witdh:20px; height: 20px"/></a>
+                                <a class="dropdown-item" href="#"><img src="{{ asset('img/gb.svg') }}" alt="English" style="witdh:20px; height: 20px"/></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="my-1">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    Bonjour {{ app.user.username }} <span class="fas fa-user"></span>
+                                {% else %}
+                                    <span class="fas fa-user"></span>
+                                {% endif %}
+
                             </a>
                             <div class="dropdown-menu">
                                 {% set route = app.request.attributes.get('_route') %}
                                 {% set route_params = app.request.attributes.get('_route_params') %}
                                 {% set params = route_params|merge(app.request.query.all) %}
 
-                                {{ dump(route, route_params, params) }}
-                                {{ dump(app.request.attributes.get('_route_params')['_locale']) }}
 
 
-                                    <a class="dropdown-item" href="{{ path(route, params|merge({ _locale: 'fr' })) }}"><img src="{{ asset('img/fr.svg') }}" alt="Francais" style="witdh:20px; height: 20px"/></a>
-                                    <a class="dropdown-item" href="{{ path(route, params|merge({ _locale: 'en' })) }}"><img src="{{ asset('img/gb.svg') }}" alt="English" style="witdh:20px; height: 20px"/></a>
 
+                                {#
+                                    {% if app.request.attributes.get('_locale') == 'fr' %}
+                                    <a class="dropdown-item" href="{{ path(route, params|merge(params|merge{ _locale: 'fr' })) }}"><img src="{{ asset('img/fr.svg') }}" alt="Francais" style="witdh:20px; height: 20px"/></a>
+                                {% else %}
+                                    <a class="dropdown-item" href="{{ path(route, params|merge(params|merge{ _locale: 'en'})) }}"><img src="{{ asset('img/gb.svg') }}" alt="English" style="witdh:20px; height: 20px"/></a>
 
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Link</a>
+                                {% endif %}
+                                #}
+
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="{{ url('admin.homepage.index') }}" class="dropdown-item"> Tableau de bord</a>
+                                {% endif %}
+
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <a href="{{ url('security.logout') }}" class="dropdown-item"> Déconnexion</a>
+                                    {% else %}
+                                        <a href="{{ url('security.login') }}" class="dropdown-item"> Connexion</a>
+                                        <a href="{{ url('account.register') }}" class="dropdown-item"> Register</a>
+                                {% endif %}
+
                             </div>
                         </li>
                     </ul>

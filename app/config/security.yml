@@ -3,9 +3,42 @@
 security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    # providers : fournisseur des comptes utilisateurs
     providers:
         in_memory:
-            memory: ~
+            memory:
+                users:
+                    admin:
+                        password: $2y$12$8lbjlfg2fGshFRmZ8ouyMODxfVyZVoMsJRmmG4.DOYR1a.P/lzB8m
+                        roles: ROLE_ADMIN
+
+        our_db_provider:
+            entity:
+                class: AppBundle\Entity\User
+                property: username
+
+        # créer un provider regroupenemt les in_memory et our_db_provider
+        all_providers:
+            chain:
+                providers: [ in_memory, our_db_provider ]
+
+    # encoders : hachage utilisé par les moys de passe
+    encoders:
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+
+        AppBundle\Entity\User:
+            algorithm: bcrypt
+
+    # role_hierarchy : clé hérite des privilèges de la valeur
+    # par ex : ROLE_ADMIN hérite de ROLE_USER
+    role_hierarchy:
+        #ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_ADMIN: ROLE_USER
+
+    access_control:
+        - { path: ^/(fr|en)/admin, roles: ROLE_ADMIN }
+        - { path: ^/(fr|en)/profile, roles: ROLE_USER }
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -18,7 +51,21 @@ security:
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
+            # http_basic: ~
 
             # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+            # login_path et check_path cible le nom d'une route
+            # default_target_path : page d'atterissage après connexion (cible toujours admin)
+            form_login:
+                login_path: security.login
+                check_path: security.login
+                #default_target_path: admin.homepage.index
+                default_target_path: security.redirect.by.role
+
+            logout:
+                path: security.logout
+                target: homepage.index
+
+            # utiliser le regroupement de providers
+            provider: all_providers
+
