@@ -28,9 +28,50 @@
                                     <span class="fas fa-globe"></span>
                             </a>
                             <div class="dropdown-menu">
+
+                                {#
+                                {% set params = app.request.attributes.get('_route_params')|merge(app.request.query.all()) %}
+                                {% set frParams = params|merge({'_locale': 'fr'}) %}
+                                {% set enParams = params|merge({'_locale': 'en'}) %}
+
+                                {% set slugfrParam = frParams['slugProduct']%}
+                                {% set slugenParam = enParams['slugProduct']%}
+
+                                #}
+
                                 <a class="dropdown-item" href="#"><img src="{{ asset('img/fr.svg') }}" alt="Francais" style="witdh:20px; height: 20px"/></a>
                                 <a class="dropdown-item" href="#"><img src="{{ asset('img/gb.svg') }}" alt="English" style="witdh:20px; height: 20px"/></a>
+
+
+
+
+
+                                {# to change locale of current page only
+
+                                {% set params = app.request.attributes.get('_route_params')|merge(app.request.query.all()) %}
+                                {% set frParams = params|merge({'_locale': 'fr'}) %}
+                                {% set enParams = params|merge({'_locale': 'en'}) %}
+
+                                {% set slugfrParam = params['slugProduct']%}
+
+                                {{ dump(slugfrParam) }}
+
+
+                                {%if app.request.locale == "en"%}
+                                    <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), frParams) }}">
+                                        <img src="{{ asset('img/fr.svg') }}" alt="Francais" style="witdh:20px; height: 20px"/>
+                                    </a>
+                                {%else%}
+                                    <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), enParams) }}">
+                                        <img src="{{ asset('img/gb.svg') }}" alt="English" style="witdh:20px; height: 20px"/>
+                                    </a>
+                                {%endif%}
+
+                                #}
                             </div>
+
+
+
                         </li>
                     </ul>
                 </div>

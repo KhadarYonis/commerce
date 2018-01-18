@@ -9,11 +9,21 @@
 namespace AppBundle\EventSubscriber;
 
 
+use AppBundle\Events\AccountCreateEvent;
 use AppBundle\Events\AccountEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class AccountEventsSubscriber implements EventSubscriberInterface
 {
+    private $mailer;
+    private $twig;
+
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig)
+    {
+        $this->mailer = $mailer;
+        $this->twig = $twig;
+    }
+    // obligatoire
     public static function getSubscribedEvents()
     {
         // TODO: Implement getSubscribedEvents() method.
@@ -35,9 +45,39 @@ class AccountEventsSubscriber implements EventSubscriberInterface
     /*
      * un gestionnaire d'événement en paramètre
      */
-    public function create()
+    public function create(AccountCreateEvent $event)
     {
-        dump('ok');
+        /*
+         * envoi d'un email
+         *      service d'emailing : SwiftMailer
+         *      message : Swift_Message
+         *          setFrom() : méthode obligatoire //expéditeur
+         *          setTo() : destinaire
+         *          setBody() : corps du message
+         *              par défaut : type text/plain > texte non enrichie
+         *      $mailer->send()  : envoie le message
+         */
+
+        $message = (new \Swift_Message('Sujet du message'))
+            ->setFrom('contact@website.com')
+            ->setTo($event->getUser()->getEmail())
+            //->setBody('<h1 style="color: blue">Bonjour</h1>', 'text/html')
+            ->setBody(
+                $this->twig->render('emailing/account.create.html.twig', [
+                    'data' => $event->getUser()
+                ]),
+                'text/html'
+            )
+            ->addPart(
+                $this->twig->render('emailing/account.create.txt.twig', [
+                    'data' => $event->getUser()
+                ])
+            )
+        ;
+
+        $this->mailer->send($message);
+
+       // dump($event); exit;
     }
 
 }

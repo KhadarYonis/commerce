@@ -61,12 +61,15 @@ class AccountController extends Controller
             // événement
             $event = new AccountCreateEvent();
 
+            // $data objet user
+            $event->setUser($data);
 
-            // déclencher l'événement AccountEvents::CREATE (dispatch declencher comme addEventListener
+
+            // déclencher l'événement AccountEvents::CREATE (dispatch declencher comme addEventListener)
 
             $dispatcher->dispatch(AccountEvents::CREATE, $event);
 
-            exit;
+            //exit;
 
             // redirection
             return $this->redirectToRoute('security.login');

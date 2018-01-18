@@ -4,35 +4,35 @@
 
     <div class="row my-4">
         <div class="col">
-            <h1 class="mb-4">S'enregistrer</h1>
+            <h1 class="mb-4">{{ 'register.title'| trans | capitalize }}</h1>
             {{ form_start(form, {'attr': { 'novalidate': 'novalidate' } } ) }}
             <p>
-                {{ form_label(form.username, 'Identifiant :') }}
+                {{ form_label(form.username, 'register.form.username' | trans | capitalize ~ ' :') }}
                 {{ form_widget(form.username, { 'attr' : {
-                    'placeholder' : 'Saisissez e-mail'
+                    'placeholder' : 'register.form.placeholder.username' | trans | capitalize
                 }}) }}
                 {{ form_errors(form.username) }}
             </p>
 
             <p>
-                {{ form_label(form.password, 'Mot de passe :') }}
+                {{ form_label(form.password, 'register.form.password' | trans | capitalize ~ ' :') }}
                 {{ form_widget(form.password, { 'attr' : {
-                    'placeholder' : 'Saisissez le mot de passe'
+                    'placeholder' : 'register.form.placeholder.password' | trans | capitalize
                 }}) }}
                 {{ form_errors(form.password) }}
             </p>
 
 
             <p>
-                {{ form_label(form.email, 'E-mail :') }}
+                {{ form_label(form.email, 'register.form.email' | trans | capitalize ~ ' :') }}
                 {{ form_widget(form.email, { 'attr' : {
-                    'placeholder' : 'Saisissez e-mail'
+                    'placeholder' : 'register.form.placeholder.email' | trans | capitalize
                 }}) }}
                 {{ form_errors(form.email) }}
             </p>
 
             <p>
-                <input type="submit" name="submit" value="Valider" class="btn btn-info">
+                <input type="submit" name="submit" value="{{ 'register.form.button'| trans | capitalize }}" class="btn btn-info">
             </p>
 
             {{ form_end(form) }}

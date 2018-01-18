@@ -14,3 +14,10 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+
+# lors de l'authentification, le mode http basic sera utilisé
+security:
+    firewalls:
+        main:
+            http_basic: ~

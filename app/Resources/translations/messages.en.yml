@@ -3,5 +3,18 @@ homepage:
     ideas: need ideas ?
     category: category
 
+register:
+    title: sign up
+    form:
+        username: username
+        password: password
+        email: e-mail
+        placeholder:
+            username: enter username
+            password: enter password
+            email: enter e-mail
+        button: submit
+
 flash_message:
     new_user: Votre compte est crée
+

@@ -3,5 +3,17 @@ homepage:
     ideas: besoin d'idées ?
     category: catégorie
 
+register:
+    title: s'enregistrer
+    form:
+        username: identifiant
+        password: mot de passe
+        email: mail
+        placeholder:
+            username: saisissez le non de l'utilisateur
+            password: saisissez le mot de passe
+            email: saisissez e-mail
+        button: valider
+
 flash_message:
     new_user: Account created
