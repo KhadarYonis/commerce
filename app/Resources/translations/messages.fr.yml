@@ -15,5 +15,9 @@ register:
             email: saisissez e-mail
         button: valider
 
+password_forget:
+    title: mot de passe oublié
+
 flash_message:
     new_user: Account created
+    password_forget: vous avez oublié votre mot de passe, il est possible de le modifier

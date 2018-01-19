@@ -9,12 +9,11 @@
 namespace AppBundle\EventSubscriber;
 
 
-use AppBundle\Events\AccountCreateEvent;
 use AppBundle\Events\AccountEvents;
 use AppBundle\Events\UserTokenCreateEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class AccountEventsSubscriber  implements EventSubscriberInterface
+class UserTokenEventsSubscriber implements EventSubscriberInterface
 {
     private $mailer;
     private $twig;
@@ -39,14 +38,14 @@ class AccountEventsSubscriber  implements EventSubscriberInterface
 
         return [
            // AccountEvents::CREATE => 'create'
-            AccountEvents::CREATE => 'create'
+            AccountEvents::PASSWORD_FORGET => 'create'
         ];
     }
 
     /*
      * un gestionnaire d'événement en paramètre
      */
-    public function create(AccountCreateEvent $event)
+    public function create(UserTokenCreateEvent $event)
     {
         /*
          * envoi d'un email
@@ -61,18 +60,11 @@ class AccountEventsSubscriber  implements EventSubscriberInterface
 
         $message = (new \Swift_Message('Sujet du message'))
             ->setFrom('contact@website.com')
-            ->setTo($event->getUser()->getEmail())
-            //->setBody('<h1 style="color: blue">Bonjour</h1>', 'text/html')
+            ->setTo($event->getUser()->getUserEmail())
             ->setBody(
-                $this->twig->render('emailing/account.create.html.twig', [
+                $this->twig->render('emailing/password_forget.create.html.twig', [
                     'data' => $event->getUser()
-                ]),
-                'text/html'
-            )
-            ->addPart(
-                $this->twig->render('emailing/account.create.txt.twig', [
-                    'data' => $event->getUser()
-                ])
+                ]), 'text/html'
             )
         ;
 

@@ -17,5 +17,6 @@ class AccountEvents
      */
     const CREATE = 'account.create';
     const DELETE = 'account.delete';
+    const PASSWORD_FORGET = 'userToken.create';
 
 }

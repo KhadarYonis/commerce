@@ -27,7 +27,7 @@ class UserEntityListener
     {
         $this->encoder = $encoder;
     }
-        
+
         
     /*
      * le nom des méthodes doivent reprendre le nom de l'événement écouté

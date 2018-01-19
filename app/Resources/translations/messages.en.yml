@@ -15,6 +15,10 @@ register:
             email: enter e-mail
         button: submit
 
+password_forget:
+    title: forget your password
+
 flash_message:
     new_user: Votre compte est crée
+    password_forget: you have forgotten your password, it is possible to modify it
 

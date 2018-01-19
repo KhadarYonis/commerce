@@ -19,9 +19,13 @@ class AuthenticationEventsSubscriber implements EventSubscriberInterface
 
     private $session;
 
-    public function __construct(SessionInterface $session)
+    // même appellation que dans services
+    private $maxAuthenticationFailure;
+
+    public function __construct(SessionInterface $session,int $maxAuthenticationFailure)
     {
         $this->session = $session;
+        $this->maxAuthenticationFailure = $maxAuthenticationFailure;
     }
 
     public static function getSubscribedEvents()
@@ -57,7 +61,7 @@ class AuthenticationEventsSubscriber implements EventSubscriberInterface
             $value = $this->session->get('authentication_failure');
 
             // si les 3 échecs ne sont pas atteints
-            if($value < 3) {
+            if($value < $this->maxAuthenticationFailure) {
                 $value++;
                 $this->session->set('authentication_failure', $value);
             }
@@ -66,7 +70,7 @@ class AuthenticationEventsSubscriber implements EventSubscriberInterface
 
         }
 
-        dump($this->session->get('authentication_failure')); exit;
+        dump($this->session->get('authentication_failure'));
     }
 
 }

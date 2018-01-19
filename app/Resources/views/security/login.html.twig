@@ -23,8 +23,9 @@
                     <input type="password" class="form-control" id="password" name="_password" />
                 </div>
                 <button type="submit" class="btn btn-primary">login</button>
-
             </form>
+            <br>
+            <p><a href="{{ path('account.password.forgot') }}">{{ 'password_forget.title' | trans | capitalize }}</a></p>
         </div>
     </div>
 {% endblock %}

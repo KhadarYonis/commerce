@@ -8,19 +8,35 @@
 
 namespace AppBundle\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class SecurityController extends  Controller
 {
     /**
      * @Route("/login", name="security.login")
      */
-    public function login(Request $request, AuthenticationUtils $authUtils)
+    public function login(Request $request, AuthenticationUtils $authUtils, SessionInterface $session, TranslatorInterface $translator)
     {
+        // récupération du nombre d'échecs de connexion : AuthenticationEventSubscriber
+
+        if($session->has('authentication_failure') && ($session->get('authentication_failure') === 3)) {
+
+            // réinitialisation
+             $session->remove('authentication_failure');
+
+             // message flash
+            $this->addFlash('notice', ucfirst($translator->trans('flash_message.password_forget')));
+
+            // redirection
+            return $this->redirectToRoute('account.password.forgot');
+        }
+
+
         // get the login error if there is one
         $error = $authUtils->getLastAuthenticationError();
 
@@ -67,4 +83,6 @@ class SecurityController extends  Controller
             return $this->redirectToRoute('profile.homepage.index');
         }
     }
+
+
 }
