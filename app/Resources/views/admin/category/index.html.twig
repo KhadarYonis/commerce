@@ -1,0 +1,32 @@
+{% extends 'admin/base.admin.html.twig' %}
+
+{% block colRight %}
+    <h1 class="mb-4">{{ 'homepage.categories'| trans | capitalize}}</h1>
+
+    {% include 'inc/flash.message.html.twig' %}
+
+    <p>
+        <a href="{{ url('admin.category.form') }}" class="btn btn-warning">{{ 'admin.form.category.add' | trans | capitalize }}</a>
+    </p>
+    <table class="table table-striped">
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </tr>
+
+        {% for category in catagories %}
+            <tr>
+                <td>{{ category.translations[app.request.locale].name | capitalize}}</td>
+                <td>{{ category.translations[app.request.locale].description | truncate(200, true) }}</td>
+                <td>
+                    <a href="{{ url('admin.category.update', { 'id' : category.id }) }}" class="btn btn-warning">{{ 'admin.form.category.modify' | trans | capitalize }}</a>
+                </td>
+                <td>
+                    <a href="{{ url('category.delete', { 'id' : category.id }) }}" class="btn btn-danger">{{ 'admin.form.category.delete' | trans | capitalize }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

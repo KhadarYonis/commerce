@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\EntityListeners({"AppBundle\EventListener\UserEntityListener"})
  */
 class User implements UserInterface, \Serializable
 {
@@ -44,6 +45,32 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
+
+
+    /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     */
+    private $address;
+
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $zipCode;
+
+
+    /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     */
+    private $city;
+
+
+    /**
+     * @ORM\Column(type="string", length=2, nullable=true)
+     */
+    private $country;
+
+
 
     public function __construct()
     {
@@ -145,4 +172,32 @@ class User implements UserInterface, \Serializable
     }
 
 
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
 }

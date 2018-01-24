@@ -1,10 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'profile/base.profile.html.twig' %}
 
-{% block body %}
-    <div class="container">
-        <h1>Profile</h1>
+{% block colRight %}
+    <div class="row my-4">
 
-        <p> Bonjour Dalmar </p>
+        <div class="col">
+            <h1 class="mb-4">Bonjour {{ app.user.username }}  - Profile</h1>
+        </div>
+
+        {% include 'inc/flash.message.html.twig' %}
+
+        <p><a href="{{ url('profile.manage.index') }}">éditer le profile</a></p>
 
     </div>
 {% endblock %}

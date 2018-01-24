@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+       <div class="col-sm-3">
+           <br><br><br><br><br>
+           <p>
+               <a href="{{ url('admin.homepage.index') }} "class="btn btn-primary"> Accueil </a>
+           </p>
+           <p>
+               <a href="{{ url('admin.category.index') }} "class="btn btn-primary"> Catégorie </a>
+           </p>
+
+           <p>
+               <a href="{{ url('admin.product.index') }} "class="btn btn-primary"> Produit </a>
+           </p>
+       </div>
+
+        <div class="col-sm-9">
+            {% block colRight %} {% endblock %}
+        </div>
+    </div>
+{% endblock %}

@@ -2,6 +2,7 @@ homepage:
     categories: categories
     ideas: need ideas ?
     category: category
+    products: products
 
 register:
     title: sign up
@@ -13,12 +14,58 @@ register:
             username: enter username
             password: enter password
             email: enter e-mail
+            address: enter address
+            zipCode: enter zipcode
+            city: enter city
+            country: enter country
+        address: address
+        zipCode: zipcode
+        city: city
+        country: country
         button: submit
+admin:
+    form:
+        category:
+            add: add
+            modify: modify
+            delete: delete
+        category_add:
+            name_fr: name in french
+            description_fr: description in french
+            name_en: name in english
+            description_en: description in english
+            placeholder:
+                    name_fr: enter name in french
+                    description_fr: enter description in french
+                    name_en: enter name in english
+                    description_en: enter description in english
+        product_add:
+            category: category
+            price : price
+            stock: stock
+            name_fr: name in french
+            description_fr: description in french
+            name_en: name in english
+            description_en: description in english
+            placeholder:
+                name_fr: enter name in french
+                description_fr: enter description in french
+                name_en: enter name in english
+                description_en: enter description in english
+                price : enter price
+                stock: enter stock
 
 password_forget:
     title: forget your password
 
 flash_message:
-    new_user: Votre compte est crée
+    new_user: account create
     password_forget: you have forgotten your password, it is possible to modify it
+    profile_edite: your profile is edited
+    add_category: category create
+    edit_category: category edited
+    delete_category: category delete
+    add_product: product create
+    edit_product: product edited
+    delete_product: product delete
 

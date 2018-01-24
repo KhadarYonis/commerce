@@ -31,6 +31,45 @@
                 {{ form_errors(form.email) }}
             </p>
 
+            {#
+
+            <p>
+                {{ form_label(form.address, 'register.form.address' | trans | capitalize ~ ' :') }}
+                {{ form_widget(form.address, { 'attr' : {
+                    'placeholder' : 'register.form.placeholder.address' | trans | capitalize
+                }}) }}
+                {{ form_errors(form.address) }}
+            </p>
+
+            <p>
+                {{ form_label(form.zipCode, 'register.form.zipCode' | trans | capitalize ~ ' :') }}
+                {{ form_widget(form.zipCode, { 'attr' : {
+                    'placeholder' : 'register.form.placeholder.zipCode' | trans | capitalize
+                }}) }}
+                {{ form_errors(form.zipCode) }}
+            </p>
+
+
+            <p>
+                {{ form_label(form.city, 'register.form.city' | trans | capitalize ~ ' :') }}
+                {{ form_widget(form.city, { 'attr' : {
+                    'placeholder' : 'register.form.placeholder.city' | trans | capitalize
+                }}) }}
+                {{ form_errors(form.city) }}
+            </p>
+
+            <p>
+                {{ form_label(form.country, 'register.form.country' | trans | capitalize ~ ' :') }}
+                {{ form_widget(form.country, { 'attr' : {
+                    'placeholder' : 'register.form.placeholder.country' | trans | capitalize
+                }}) }}
+                {{ form_errors(form.country) }}
+            </p>
+
+            #}
+
+
+
             <p>
                 <input type="submit" name="submit" value="{{ 'register.form.button'| trans | capitalize }}" class="btn btn-info">
             </p>

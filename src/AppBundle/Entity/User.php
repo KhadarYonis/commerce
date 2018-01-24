@@ -46,6 +46,32 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+
+    /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     */
+    private $address;
+
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $zipCode;
+
+
+    /**
+     * @ORM\Column(type="string", length=150, nullable=true)
+     */
+    private $city;
+
+
+    /**
+     * @ORM\Column(type="string", length=2, nullable=true)
+     */
+    private $country;
+
+
+
     public function __construct()
     {
         $this->isActive = true;
@@ -173,5 +199,101 @@ class User implements UserInterface, \Serializable
         $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return User
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set zipCode
+     *
+     * @param string $zipCode
+     *
+     * @return User
+     */
+    public function setZipCode($zipCode)
+    {
+        $this->zipCode = $zipCode;
+
+        return $this;
+    }
+
+    /**
+     * Get zipCode
+     *
+     * @return string
+     */
+    public function getZipCode()
+    {
+        return $this->zipCode;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return User
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return User
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
     }
 }

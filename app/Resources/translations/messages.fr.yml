@@ -2,6 +2,7 @@ homepage:
     categories: catégories
     ideas: besoin d'idées ?
     category: catégorie
+    products: produits
 
 register:
     title: s'enregistrer
@@ -13,11 +14,56 @@ register:
             username: saisissez le non de l'utilisateur
             password: saisissez le mot de passe
             email: saisissez e-mail
+            address: saisissez l'adresse
+            zipCode: saisissez le code postal
+            city: saisissez la ville
+            country: saisissez le pays
+        address: adresse
+        zipCode: code postal
+        city: ville
+        country: pays
         button: valider
-
+admin:
+    form:
+        category:
+            add: ajouter
+            modify: modifier
+            delete: supprimer
+        category_add:
+            name_fr: nom en français
+            description_fr: description en français
+            name_en: nom en anglais
+            description_en: description en anglais
+            placeholder:
+                    name_fr: entrez le nom du catégorie en français
+                    description_fr: entrez la description en français
+                    name_en: entrez le nom du catégorie en anglais
+                    description_en: entrez la description en anglais
+        product_add:
+            category: catégorie
+            price : prix
+            stock: stock
+            name_fr: nom en français
+            description_fr: description en français
+            name_en: nom en anglais
+            description_en: description en anglais
+            placeholder:
+                    name_fr: entrez le nom du catégorie en français
+                    description_fr: entrez la description en français
+                    name_en: entrez le nom du catégorie en anglais
+                    description_en: entrez la description en anglais
+                    price: saisissez le prix
+                    stock: saisissez le stock
 password_forget:
     title: mot de passe oublié
 
 flash_message:
-    new_user: Account created
+    new_user: votre compte est créé
     password_forget: vous avez oublié votre mot de passe, il est possible de le modifier
+    profile_edite: votre profile a été bien complété
+    add_category: votre catégorie est créé
+    edit_category: votre catégorie est modifié
+    delete_category: catégorie supprimé
+    add_product: votre produit est créé
+    edit_product: votre produit est modifié
+    delete_product: produit supprimé

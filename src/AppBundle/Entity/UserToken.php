@@ -24,7 +24,7 @@ class UserToken
     /**
      * @var string
      *
-     * @ORM\Column(name="user_email", type="string", length=50)
+     * @ORM\Column(name="user_email", type="string", length=50, unique=true)
      */
     private $userEmail;
 

@@ -14,6 +14,7 @@ use AppBundle\Entity\UserToken;
 use AppBundle\Events\AccountCreateEvent;
 use AppBundle\Events\AccountEvents;
 use AppBundle\Events\UserTokenCreateEvent;
+use AppBundle\Form\UserResetpassword;
 use AppBundle\Form\UserTokenType;
 use AppBundle\Form\UserType;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -91,7 +92,6 @@ class AccountController extends Controller
 
     public function resetPasswordAction(Request $request, EventDispatcherInterface $dispatcher, ManagerRegistry $doctrine)
     {
-        // On créer un contact
         $userToken =  new UserToken();
 
         // on récupère le formulaire
@@ -106,53 +106,54 @@ class AccountController extends Controller
 
             $data->setToken(bin2hex(random_bytes(12)));
 
-            $data->setExpirationDate(new \DateTime('+1 day'));
 
 
 
-            $date_today = new \DateTime();
-
-            $interval = date_diff($data->getExpirationDate(), $date_today);
+          //  $interval = ;
 
 
             // recupérer l'objet user qui posséde un mail que on vient de taper s'il existe sinon return null
             $user = $doctrine->getRepository(User::class)->findOneBy(['email' => $data->getUserEmail()]);
 
+            $userTokenEmail = $doctrine->getRepository(UserToken::class)->findOneBy([
+                'userEmail' => $data->getUserEmail()
+            ]);
 
-
-           // dump($user); exit;
-
-
-            // on enregistre le contact dans bdd
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($userToken);
-
-            $em->flush();
 
             // événement
             $event = new UserTokenCreateEvent();
 
             // $data objet userToken
 
-
             $event->setUser($data);
-            if($user && $interval->format('%d') <= "1") {
 
-                $dispatcher->dispatch(AccountEvents::PASSWORD_FORGET, $event);
+            if($user) {
+
+
+                $data->setExpirationDate(new \DateTime('+1 day'));
+
+                if (!$userTokenEmail && date_diff($data->getExpirationDate(), new \DateTime())->format('%d') <= "1") {
+
+                    $dispatcher->dispatch(AccountEvents::PASSWORD_FORGET, $event);
+
+                    // on enregistre le contact dans bdd
+                    $em = $this->getDoctrine()->getManager();
+
+                    $em->persist($data);
+
+                    $em->flush();
+                }
+
             }
-
-
 
             // message flash
 
             $this->addFlash('notice', 'Un mail a été envoyé sur ta boîte mail.');
             // redirection
             return $this->redirectToRoute('account.password.forgot');
-
-
-
         }
+
+
         // on generer le html du formulaire crée
         $formView = $form->createView();
 
@@ -168,15 +169,40 @@ class AccountController extends Controller
      * @Route("/password/recovery/{email}/{token}", name="account.reset.password")
      */
 
-    public function reset_passwordAction(ManagerRegistry $register, string $email, string $token):Response
+    public function reset_passwordAction(ManagerRegistry $doctrine, Request $request, string $email, string $token):Response
     {
-        $user = new UserToken();
 
-        $email = $user->getToken();
-        $token = $user->getToken();
+        $rc = $doctrine->getRepository(UserToken::class);
 
-        return $this->render('account/password.reset.html.twig', [
-            'data' => $user
+
+        $userToken = $rc->findOneBy([
+            'userEmail' => $email,
+            'token' => $token
         ]);
+
+
+        $user = $doctrine->getRepository(User::class)->findOneBy(['email' => $userToken->getUserEmail()]);
+
+        // on récupère le formulaire
+        $form = $this->createForm(UserResetpassword::class, $user);
+
+        // récuperation des données dans la requète
+       $form->handleRequest($request);
+
+        //if($form->isSubmitted() && $form->isValid()) {
+            //if($userToken) {
+                $data = $form->getData();
+           // }
+        //}
+
+        // on generer le html du formulaire crée
+        $formView = $form->createView();
+        //dump($userToken->getUserEmail(), $user, $data); exit;
+
+            return $this->render('account/password.reset.html.twig', [
+                'form' => $formView
+            ]);
+
+
     }
 }

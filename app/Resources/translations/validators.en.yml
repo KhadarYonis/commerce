@@ -3,3 +3,7 @@ password: password is empty
 email:
     notblank: mail is empty
     incorrect: mail incorrect
+address: address is empty
+zipCode: zipcode is empty
+city: city is empty
+country: country is empty

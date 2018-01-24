@@ -1,0 +1,111 @@
+{% extends 'admin/base.admin.html.twig' %}
+
+{% block colRight %}
+
+    <div class="row my-4">
+        <div class="col">
+            <h1 class="mb-4">{{ 'homepage.products'| trans | capitalize}}</h1>
+
+
+
+            {{ form_start(form, {'attr': { 'novalidate': 'novalidate' } } ) }}
+
+            <p>
+                {{ form_label(form.price, 'admin.form.product_add.price' | trans | capitalize ~ ' :') }}
+                {{ form_widget(form.price, { 'attr' : {
+                    'placeholder' : 'admin.form.product_add.placeholder.price' | trans | capitalize
+                }}) }}
+                {{ form_errors(form.price) }}
+            </p>
+
+            <p>
+                {{ form_label(form.stock, 'admin.form.product_add.stock' | trans | capitalize ~ ' :') }}
+                {{ form_widget(form.stock, { 'attr' : {
+                    'placeholder' : 'admin.form.product_add.placeholder.stock' | trans | capitalize
+                }}) }}
+                {{ form_errors(form.name_fr) }}
+            </p>
+
+            <p>
+                {{ form_label(form.category, 'admin.form.product_add.category' | trans | capitalize ~ ' :') }}
+                {{ form_widget(form.category) }}
+                {{ form_errors(form.category) }}
+            </p>
+
+            <p>
+                {{ form_label(form.image, 'Image' | trans | capitalize ~ ' :') }}
+                {{ form_widget(form.image) }}
+                {{ form_errors(form.image) }}
+            </p>
+
+
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="fr-tab" data-toggle="tab" href="#home" role="tab" aria-controls="fr" aria-selected="true">FR</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="en-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="en" aria-selected="false">EN</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="fr-tab">
+                    <br>
+                    <p>
+                        {{ form_label(form.name_fr, 'admin.form.product_add.name_fr' | trans | capitalize ~ ' :') }}
+                        {{ form_widget(form.name_fr, { 'attr' : {
+                            'placeholder' : 'admin.form.product_add.placeholder.name_fr' | trans | capitalize
+                        }}) }}
+                        {{ form_errors(form.name_fr) }}
+                    </p>
+
+
+                    <p>
+                        {{ form_label(form.description_fr, 'admin.form.product_add.description_fr' | trans | capitalize ~ ' :') }}
+                        {{ form_widget(form.description_fr, { 'attr' : {
+                            'placeholder' : 'admin.form.product_add.placeholder.description_fr' | trans | capitalize
+                        }}) }}
+                        {{ form_errors(form.description_fr) }}
+                    </p>
+
+                </div>
+
+
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="en-tab">
+                    <br>
+                    <p>
+                        {{ form_label(form.name_en,'admin.form.product_add.name_en' | trans | capitalize ~ ' :') }}
+                        {{ form_widget(form.name_en, { 'attr' : {
+                            'placeholder' : 'admin.form.product_add.placeholder.name_en' | trans | capitalize
+                        }}) }}
+                        {{ form_errors(form.name_en) }}
+                    </p>
+
+
+                    <p>
+                        {{ form_label(form.description_en, 'admin.form.category_add.description_en' | trans | capitalize ~ ' :') }}
+                        {{ form_widget(form.description_en, { 'attr' : {
+                            'placeholder' : 'admin.form.category_add.placeholder.description_en' | trans | capitalize
+                        }}) }}
+                        {{ form_errors(form.description_en) }}
+                    </p>
+
+                </div>
+
+
+
+            </div>
+
+            <p>
+                <input type="submit" name="submit" value="{{ 'admin.form.category.add'| trans | capitalize }}" class="btn btn-info">
+            </p>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+{% endblock %}
