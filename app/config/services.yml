@@ -64,8 +64,13 @@ services:
             $locales: '%locales%'
 
     AppBundle\Form\ProductType:
-            arguments:
-                $locales: '%locales%'
+        arguments:
+            $locales: '%locales%'
+
+    AppBundle\EventSubscriber\KernelEventsSubscriber:
+        arguments:
+            $maintenanceEnable: '%maintenance_enable%'
+
 
 
 

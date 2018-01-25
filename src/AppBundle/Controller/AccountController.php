@@ -62,6 +62,7 @@ class AccountController extends Controller
 
             $this->addflash('notice', $translator->trans('flash_message.new_user'));
 
+
             // événement
             $event = new AccountCreateEvent();
 
