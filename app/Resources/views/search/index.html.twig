@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row my-4">
+        <div class="col-sm-3">
+            <h3>{{ 'homepage.categories' | trans | capitalize }}</h3>
+            <br>
+            <form method="post">
+                {% for category in categories %}
+                    <p>
+                        <input type="radio" value="{{ category.id}}" name="select-category" id="{{ category.translations[app.request.locale].name | capitalize}}"/>
+                        <label for="{{ category.translations[app.request.locale].name | capitalize}}">{{ category.translations[app.request.locale].name }}</label>
+                    </p>
+                {% endfor %}
+            </form>
+        </div>
+
+        <div class="col-sm-9">
+            <h3>{{ 'homepage.products' | trans | capitalize }}</h3>
+            <br>
+            <div class="row my-4 search-results">
+            {% for product in products %}
+
+                    <div class="col-sm-4">
+                        <img src="{{ asset('img/product/' ~ product.image) }}" class="img-fluid" alt="{{ product.translations[app.request.locale].name }}">
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="h4 my-1">{{ product.translations[app.request.locale].name | capitalize }}</p>
+                        <p class="my-1">{{ product.translations[app.request.locale].description }}</p>
+                        <p class="h5 my-2">{{ product.price | localizedcurrency('EUR')}}</p>
+                        <p class="my-2 text-success">In stock</p>
+                    </div>
+
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="{{ asset('js/search.js') }}"></script>
+{% endblock %}

@@ -21,6 +21,66 @@
                         {{ render_menu() | raw }}
                     </li>
                 </ul>
+
+
+                <div class="my-1">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                <span class="fas fa-euro-sign"></span>
+                            </a>
+                            <div class="dropdown-menu">
+
+                                {#
+                                {% set params = app.request.attributes.get('_route_params')|merge(app.request.query.all()) %}
+                                {% set frParams = params|merge({'_locale': 'fr'}) %}
+                                {% set enParams = params|merge({'_locale': 'en'}) %}
+
+                                {% set slugfrParam = frParams['slugProduct']%}
+                                {% set slugenParam = enParams['slugProduct']%}
+
+                                #}
+
+                                <a class="dropdown-item" href="#"><span class="selectCurrency fas fa-euro-sign"> EUR</span></a>
+                                <a class="dropdown-item" href="#"><span class="selectCurrency fas fa-dollar-sign"> USD</span></a>
+                                <a class="dropdown-item" href="#"><span class="selectCurrency fas fa-pound-sign"> GBP</span></a>
+
+
+
+
+                                {# to change locale of current page only
+
+                                {% set params = app.request.attributes.get('_route_params')|merge(app.request.query.all()) %}
+                                {% set frParams = params|merge({'_locale': 'fr'}) %}
+                                {% set enParams = params|merge({'_locale': 'en'}) %}
+
+                                {% set slugfrParam = params['slugProduct']%}
+
+                                {{ dump(slugfrParam) }}
+
+
+                                {%if app.request.locale == "en"%}
+                                    <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), frParams) }}">
+                                        <img src="{{ asset('img/fr.svg') }}" alt="Francais" style="witdh:20px; height: 20px"/>
+                                    </a>
+                                {%else%}
+                                    <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), enParams) }}">
+                                        <img src="{{ asset('img/gb.svg') }}" alt="English" style="witdh:20px; height: 20px"/>
+                                    </a>
+                                {%endif%}
+
+                                #}
+                            </div>
+
+
+
+                        </li>
+                    </ul>
+                </div>
+
+
+
+
                 <div class="my-1">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
@@ -75,6 +135,8 @@
                         </li>
                     </ul>
                 </div>
+
+
                 <div class="my-1">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">

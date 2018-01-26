@@ -1,0 +1,97 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ExchangeRate
+ *
+ * @ORM\Table(name="exchange_rate")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ExchangeRateRepository")
+ */
+class ExchangeRate
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="device", type="string", length=3)
+     */
+    private $device;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="rate", type="decimal", precision=5, scale=5)
+     */
+    private $rate;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set device
+     *
+     * @param string $device
+     *
+     * @return ExchangeRate
+     */
+    public function setDevice($device)
+    {
+        $this->device = $device;
+
+        return $this;
+    }
+
+    /**
+     * Get device
+     *
+     * @return string
+     */
+    public function getDevice()
+    {
+        return $this->device;
+    }
+
+    /**
+     * Set rate
+     *
+     * @param string $rate
+     *
+     * @return ExchangeRate
+     */
+    public function setRate($rate)
+    {
+        $this->rate = $rate;
+
+        return $this;
+    }
+
+    /**
+     * Get rate
+     *
+     * @return string
+     */
+    public function getRate()
+    {
+        return $this->rate;
+    }
+}
+

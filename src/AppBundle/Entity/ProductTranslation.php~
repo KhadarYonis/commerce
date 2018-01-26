@@ -96,4 +96,3 @@ class ProductTranslation
         return implode('-', $values);
     }
 }
-
