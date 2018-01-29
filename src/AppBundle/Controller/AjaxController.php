@@ -109,6 +109,8 @@ class AjaxController extends Controller
 
         $exchangeRate = $doctrine->getRepository(ExchangeRate::class)->findOneBy(['device' => $selectValue]);
 
+        dump($exchangeRate);exit;
+
         $normalizes = [ new ObjectNormalizer()];
 
         $encoders = [new JsonEncoder(), new XmlEncoder()];
@@ -123,6 +125,7 @@ class AjaxController extends Controller
 
         // response
         $response = new Response($results);
+
 
         return $response;
 

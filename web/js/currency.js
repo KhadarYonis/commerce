@@ -4,6 +4,7 @@
     () => {
         let selectCurrency = $('span.selectCurrency');
 
+
         selectCurrency.on('click', onSelectCurrency);
 
         function onSelectCurrency (e) {
