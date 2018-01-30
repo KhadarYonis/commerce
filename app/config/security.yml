@@ -22,7 +22,7 @@ security:
             chain:
                 providers: [ in_memory, our_db_provider ]
 
-    # encoders : hachage utilisé par les moys de passe
+    # encoders : hachage utilisé par les mots de passe
     encoders:
         Symfony\Component\Security\Core\User\User:
             algorithm: bcrypt

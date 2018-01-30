@@ -48,7 +48,7 @@
             }
             else {
                 html +=`
-                    <h3 class="h3">pas de produit à cette catégorie</h3>
+                    <h3 class="alert alert-warning">IL N'Y PAS de produit à cette catégorie</h3>
                 `
             }
 

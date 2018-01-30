@@ -48,5 +48,45 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
         return $result;
     }
 
+    public function getSearchResults(string $locale, string $search):array
+    {
+        // si select return objet sinon un tab
+        $result = $this->createQueryBuilder('product')
+            ->join('product.translations', 'p_trans')
+            ->where('p_trans.locale = :locale')
+            ->andWhere('p_trans.name LIKE :search OR p_trans.description LIKE :search')
+            ->setParameters([
+                'locale' => $locale,
+                'search' => "%$search%"
+            ])
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $result;
+
+
+    }
+
+    public function getNameBySearchResults(string $locale, string $searchValue)
+    {
+        // si select return objet sinon un tab
+        $result = $this->createQueryBuilder('product')
+            ->select('p_trans.name')
+            ->join('product.translations', 'p_trans')
+            ->where('p_trans.locale = :locale')
+            ->andWhere('p_trans.name LIKE :search OR p_trans.description LIKE :search')
+            ->setParameters([
+                'locale' => $locale,
+                'search' => "%$searchValue%"
+            ])
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $result;
+    }
+
 
 }

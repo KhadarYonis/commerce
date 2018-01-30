@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
 use AppBundle\Entity\ExchangeRate;
+use AppBundle\Entity\Product;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -27,6 +28,25 @@ use Symfony\Component\Serializer\Serializer;
  */
 class AjaxController extends Controller
 {
+    /**
+     * @Route("/datalist", name="ajax.datalist")
+     */
+
+    public function datalistAction(Request $request, ManagerRegistry $doctrine):JsonResponse
+    {
+        $searchValue = $request->request->get('searchValue');
+
+        // récupération de la locale
+        $locale = $request->getLocale();
+
+        // produits de la catégorie
+        $products = $doctrine->getRepository(Product::class)->getNameBySearchResults($locale, $searchValue);
+
+        $response = new JsonResponse($products);
+
+        return $response;
+
+    }
 
     /**
      * @Route("/search", name="ajax.search")
